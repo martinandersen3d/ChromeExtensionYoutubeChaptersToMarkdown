@@ -1,18 +1,5 @@
-console.log("YM: Popup script loaded");
-
-document.getElementById("ym-copy").addEventListener("click", function() {
-
-    console.log('YM: AA');
-
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    chrome.scripting.executeScript({
-      target: { tabId: tabs[0].id },
-      function: yourContentScriptFunction
-    });
+// popup.js
+document.addEventListener('DOMContentLoaded', function () {
+    // Add your popup logic here
+    console.log('YM: Popup loaded successfully!');
   });
-});
-
-function yourContentScriptFunction() {
-    // Your content script logic goes here
-    chrome.runtime.sendMessage({ action: "ym-copy" });
-  }

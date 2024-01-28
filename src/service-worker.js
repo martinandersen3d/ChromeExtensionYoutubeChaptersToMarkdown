@@ -11,3 +11,31 @@ importScripts('service-worker-utils.js')
 // extension, simply do `importScripts('path/to/file.js')`.
 // The path should be relative to the file `manifest.json`.
 
+chrome.runtime.onInstalled.addListener(function () {
+    console.log("YM: Extension Installed");
+  });
+  
+  chrome.action.onClicked.addListener(function (tab) {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: initContentScript,
+    });
+  });
+  
+  function initContentScript() {
+    console.log("YM: Content Script Loaded");
+  
+    // Add your logic here for injecting scripts or interacting with the page
+    chrome.scripting.executeScript({
+      function: () => {
+        // This is a simple example, you can customize it as needed
+        const button = document.createElement("button");
+        button.textContent = "Click me!";
+        document.body.appendChild(button);
+  
+        button.addEventListener("click", function () {
+          alert("Button Clicked!");
+        });
+      },
+    });
+  }
