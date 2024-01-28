@@ -11,31 +11,11 @@ importScripts('service-worker-utils.js')
 // extension, simply do `importScripts('path/to/file.js')`.
 // The path should be relative to the file `manifest.json`.
 
-chrome.runtime.onInstalled.addListener(function () {
-    console.log("YM: Extension Installed");
+// Listen for messages from the popup or other parts of the extension
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.action === "popup-window-opened") {
+      console.log("YM: Button clicked message received in background script");
+  
+      // Add your logic here to respond to the button click event
+    }
   });
-  
-  chrome.action.onClicked.addListener(function (tab) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: initContentScript,
-    });
-  });
-  
-  function initContentScript() {
-    console.log("YM: Content Script Loaded");
-  
-    // Add your logic here for injecting scripts or interacting with the page
-    chrome.scripting.executeScript({
-      function: () => {
-        // This is a simple example, you can customize it as needed
-        const button = document.createElement("button");
-        button.textContent = "Click me!";
-        document.body.appendChild(button);
-  
-        button.addEventListener("click", function () {
-          alert("Button Clicked!");
-        });
-      },
-    });
-  }
