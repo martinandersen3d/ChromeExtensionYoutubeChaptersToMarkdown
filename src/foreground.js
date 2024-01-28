@@ -10,6 +10,47 @@ console.log("YM: This prints to the console of the page (injected only if the pa
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+    function copyToClipboard(textToCopy) {
+        // Check if the Clipboard API is supported
+        if (navigator.clipboard) {
+            // Check if textToCopy is a string
+            if (typeof textToCopy === 'string') {
+                // Use the Clipboard API to copy text
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        console.log('Text successfully copied to clipboard');
+                    })
+                    .catch((err) => {
+                        console.error('Unable to copy text to clipboard', err);
+                    });
+            } else {
+                console.error('Invalid data type. textToCopy must be a string.');
+            }
+        } else {
+            // If Clipboard API is not supported, show an alert
+            alert("No clipboard supportet");
+        }
+    }
+
+
+
+    let elMdTextarea = this.getElementById('ym-md-output')
+    elMdTextarea.innerText = "Text from textarea"
+
+    let elBtnCopyMarkdown = this.getElementById('ym-btn-copy-markdown')
+    
+
+    elBtnCopyMarkdown.addEventListener('click', function() {
+        // let elMdTextarea = this.getElementById('ym-md-output')
+        // elMdTextarea.innerText = "Text from textarea"
+        // let elMdTextarea2 = document.getElementById('ym-md-output')
+        // alert(elMdTextarea.innerText)
+        // console.log(elMdTextarea)
+        copyToClipboard(elMdTextarea.value)
+      });
+
+    
     // function hello (){
     //     alert('Hi')
     // }
@@ -18,8 +59,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // document.append('<a link="#">MY LING</a>')
     // hello()
 
+    // Send message to service-worker.js
     chrome.runtime.sendMessage({ action: "popup-window-opened" });
 
 
+    // const getTitle = () => {
+    //     console.log("getTitle() = " + document.title);
+    //     return document.title;
+    //   }
+      
+    //   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    //     console.log("Execute Script");
+    //     chrome.scripting.executeScript({
+    //       target: { tabId: tabs[0].id },
+    //       func: getTitle
+    //     }, (result) => {
+    //       console.log("Recv result = " + result[0].result);
+    //       document.getElementById("title").innerText = result[0].result;
+    //     });
+    //   });
+
+
+ 
 
   });

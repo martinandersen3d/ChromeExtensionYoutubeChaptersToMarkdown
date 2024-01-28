@@ -15,7 +15,8 @@ importScripts('service-worker-utils.js')
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action === "popup-window-opened") {
       console.log("YM: Button clicked message received in background script");
-  
+    //   var el = document.getElementById('description')
+    //   el.style.backgroundColor = 'red'
       // Add your logic here to respond to the button click event
     }
   });
