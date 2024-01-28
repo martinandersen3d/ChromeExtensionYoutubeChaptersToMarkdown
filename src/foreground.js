@@ -6,16 +6,29 @@
 
 console.log("YM: This prints to the console of the page (injected only if the page url matched)")
 
-
+let shared = "sdfdsf"
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  
+
+    console.log(this.getElementById("description"))
 
     function copyToClipboard(textToCopy) {
         // Check if the Clipboard API is supported
         if (navigator.clipboard) {
             // Check if textToCopy is a string
             if (typeof textToCopy === 'string') {
+
+                // Check if the user have grandted acces to the clipboard
+                navigator.clipboard.writeText('')
+                .then(() => {
+                    // Permission granted, now proceed to copy text
+                })
+                .catch(() => {
+                    // Permission denied or unable to get permission
+                });
+
                 // Use the Clipboard API to copy text
                 navigator.clipboard.writeText(textToCopy)
                     .then(() => {
@@ -42,13 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     elBtnCopyMarkdown.addEventListener('click', function() {
-        // let elMdTextarea = this.getElementById('ym-md-output')
-        // elMdTextarea.innerText = "Text from textarea"
-        // let elMdTextarea2 = document.getElementById('ym-md-output')
-        // alert(elMdTextarea.innerText)
-        // console.log(elMdTextarea)
+
         copyToClipboard(elMdTextarea.value)
-      });
+    });
 
     
     // function hello (){
@@ -83,3 +92,5 @@ document.addEventListener('DOMContentLoaded', function () {
  
 
   });
+
+  

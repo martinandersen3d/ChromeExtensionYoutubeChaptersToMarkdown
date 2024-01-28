@@ -3,13 +3,19 @@ body {
     /* color: #eee; */
     padding: 8px;
     width: 400px;
-    height: 500px;
+    max-height: 600px;
+    min-height: 200px;
 }
 
 .full-width {
     width: 100%;
 }
 
+.scrollbar{
+    overflow: visible; 
+    white-space: nowrap; 
+    max-height: 400px;
+}
 /**************************************/
         /* Minimal CSS Reset */
         * {
