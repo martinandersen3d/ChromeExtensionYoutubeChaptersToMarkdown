@@ -12,7 +12,7 @@
     "options_page": "settings/settings.html",
     "action": {
         "default_title": "Chrome Addon v3 Starter",
-        "default_popup": "popup/popup.html"
+        "default_popup": "popup.html"
     },
     "permissions": [],
     "host_permissions": [

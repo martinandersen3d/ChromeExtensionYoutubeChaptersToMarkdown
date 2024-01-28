@@ -5,3 +5,9 @@
 // and injected into the same or different pages.
 
 console.log("YM: This prints to the console of the page (injected only if the page url matched)")
+// popup.js
+document.addEventListener('DOMContentLoaded', function () {
+    // Add your popup logic here
+    console.log('YM: Popup loaded successfully!');
+    document.append('<a link="#">MY LING</a>')
+  });
