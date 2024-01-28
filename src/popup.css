@@ -1,11 +1,70 @@
 body {
-    background-color: #222;
-    color: #eee;
-
-    width: 16rem;
-    height: 4rem;
+    background-color: #eee;
+    /* color: #eee; */
+    padding: 8px;
+    width: 400px;
+    height: 500px;
 }
 
-.special-text {
-    color: red;
+.full-width {
+    width: 100%;
 }
+
+/**************************************/
+        /* Minimal CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Bootstrap-like Styles */
+        body {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid #007bff;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
