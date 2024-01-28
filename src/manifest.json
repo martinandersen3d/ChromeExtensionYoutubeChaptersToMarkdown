@@ -23,6 +23,6 @@
     },
     "content_scripts": [{
         "js": ["foreground.js"],
-        "matches": ["*://www.youtube.com/*"]
+        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*"]
     }]
 }
