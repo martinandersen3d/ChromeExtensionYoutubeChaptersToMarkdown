@@ -2,6 +2,34 @@
 // when the extension is installed or refreshed (or when you access its console).
 // It would correspond to the background script in chrome extensions v2.
 
+
+try{
+
+    //ON page change
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+      if(changeInfo.status == 'complete'){
+
+        console.log('Hit')
+        chrome.scripting.executeScript({
+            files: ['contentScript.js'],
+            target: {tabId: tab.id}
+          });
+
+
+    //   if (changeInfo.url) {
+    //     chrome.scripting.executeScript({
+    //       files: ['contentScript.js'],
+    //       target: {tabId: tab.id}
+    //     });
+    //   }
+      }
+    });
+  
+  
+  }catch(e){
+    console.log(e);
+  }
+
 console.log("This prints to the console of the service worker (background script)")
 
 // Importing and using functionality from external files is also possible.
@@ -18,5 +46,36 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     //   var el = document.getElementById('description')
     //   el.style.backgroundColor = 'red'
       // Add your logic here to respond to the button click event
+
+    //   console.log(this)
     }
   });
+
+
+  // Sender Dom'en over--------------------------------------
+//   function extractDOM() {
+//     console.log("DOM:")
+//     const allElements = document.querySelectorAll('*');
+//     const elementsArray = Array.from(allElements).map(element => element.outerHTML);
+  
+//     console.log(elementsArray);
+//     // You can do whatever you want with elementsArray, for example, send it to popup.js
+//   }
+
+//   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//     if (message.action === 'extractDOM') {
+//       chrome.scripting.executeScript({
+//         target: { tabId: sender.tab.id },
+//         function: extractDOM,
+//       });
+//     }
+//   });
+  
+
+// console.log('sada------------------------------------------------')
+//   const allElements = document.querySelectorAll('*');
+//   const elementsArray = Array.from(allElements).map(element => element.outerHTML);
+
+//   console.log(elementsArray);
+
+

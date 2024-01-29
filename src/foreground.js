@@ -4,15 +4,26 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
+console.log(this)
+
 console.log("YM: This prints to the console of the page (injected only if the page url matched)")
 
 let shared = "sdfdsf"
+// alert(window.document.title)
+// alert(document.title)
+let pageTitle = document.title
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  
+    // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    //     chrome.tabs.sendMessage(tabs[0].id, { action: 'extractDOM' });
+    //   });
 
-    console.log(this.getElementById("description"))
+//     alert(pageTitle)
+//   console.log('YM: CONTENT LOADED');
+
+//     console.log(this.getElementById("description"))
 
     function copyToClipboard(textToCopy) {
         // Check if the Clipboard API is supported
@@ -71,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Send message to service-worker.js
     chrome.runtime.sendMessage({ action: "popup-window-opened" });
 
-
     // const getTitle = () => {
     //     console.log("getTitle() = " + document.title);
     //     return document.title;
@@ -92,5 +102,10 @@ document.addEventListener('DOMContentLoaded', function () {
  
 
   });
+
+  
+
+  // --------------------------------------
+
 
   

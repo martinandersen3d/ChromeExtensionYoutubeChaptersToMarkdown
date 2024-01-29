@@ -14,7 +14,7 @@
         "default_title": "Chrome Addon v3 Starter",
         "default_popup": "popup.html"
     },
-    "permissions": [],
+    "permissions": ["scripting"],
     "host_permissions": [
         "*://*/*"
     ],
@@ -23,6 +23,7 @@
     },
     "content_scripts": [{
         "js": ["foreground.js"],
-        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*"]
+        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*"],
+        "run_at": "document_end"
     }]
 }
