@@ -1,5 +1,6 @@
-console.log('------------------HIT')
-alert("ko lort")
+console.log('YM: Hello from: contentScript')
+alert("Hello from: contentScript")
+
 
 
 if(typeof init === 'undefined'){
@@ -9,3 +10,17 @@ if(typeof init === 'undefined'){
     }
     init();
   }
+
+
+
+// Example: Content script injected into the page
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log(request.message);
+  
+    // Perform an action based on the received message
+    if (request.message === "Hello from service worker!") {
+      // Add your custom action here
+      console.log("Received a greeting from the service worker!");
+      alert("Hello! This is a message from the service worker.");
+    }
+  });

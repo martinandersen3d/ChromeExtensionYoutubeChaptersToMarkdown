@@ -78,4 +78,22 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
 //   console.log(elementsArray);
 
-
+chrome.runtime.onInstalled.addListener(() => {
+    console.log("Extension Installed");
+  
+    // Example: Sending a message from the background (service worker)
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const activeTab = tabs[0];
+  
+      // Execute content script in the active tab
+      chrome.scripting.executeScript({
+        target: { tabId: activeTab.id },
+        function: sendScriptToPage,
+      });
+    });
+  });
+  
+  // Function to send a message to the content script injected into the page
+  function sendScriptToPage() {
+    chrome.runtime.sendMessage({ message: "Hello from service worker!" });
+  }

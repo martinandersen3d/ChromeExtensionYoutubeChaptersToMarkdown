@@ -4,9 +4,6 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-console.log(this)
-
-console.log("YM: This prints to the console of the page (injected only if the page url matched)")
 
 let shared = "sdfdsf"
 // alert(window.document.title)
@@ -16,6 +13,9 @@ let pageTitle = document.title
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+    cconsole.log('YM: Hello from: foreground')
+    alert("Hello from: foreground")
     // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     //     chrome.tabs.sendMessage(tabs[0].id, { action: 'extractDOM' });
     //   });
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   
-
+  
   // --------------------------------------
 
 
