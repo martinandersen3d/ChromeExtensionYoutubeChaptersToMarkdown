@@ -14,7 +14,7 @@
         "default_title": "Chrome Addon v3 Starter",
         "default_popup": "popup.html"
     },
-    "permissions": ["scripting"],
+    "permissions": ["scripting", "activeTab", "tabs", "clipboardWrite"],
     "host_permissions": [
         "*://*/*"
     ],

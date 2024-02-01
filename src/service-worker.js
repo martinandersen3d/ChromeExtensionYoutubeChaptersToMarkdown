@@ -3,53 +3,59 @@
 // It would correspond to the background script in chrome extensions v2.
 
 
-try{
+// try{
 
-    //ON page change
-    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-      if(changeInfo.status == 'complete'){
+//     //ON page change
+//     chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+//       if(changeInfo.status == 'complete'){
 
-        console.log('Hit')
-        chrome.scripting.executeScript({
-            files: ['contentScript.js'],
-            target: {tabId: tab.id}
-          });
+//         console.log('Hit')
+//         chrome.scripting.executeScript({
+//             files: ['contentScript.js'],
+//             target: {tabId: tab.id}
+//           });
 
 
-    //   if (changeInfo.url) {
-    //     chrome.scripting.executeScript({
-    //       files: ['contentScript.js'],
-    //       target: {tabId: tab.id}
-    //     });
-    //   }
-      }
-    });
+//     //   if (changeInfo.url) {
+//     //     chrome.scripting.executeScript({
+//     //       files: ['contentScript.js'],
+//     //       target: {tabId: tab.id}
+//     //     });
+//     //   }
+//       }
+//     });
   
   
-  }catch(e){
-    console.log(e);
-  }
+//   }catch(e){
+//     console.log(e);
+//   }
 
-console.log("This prints to the console of the service worker (background script)")
+// console.log("This prints to the console of the service worker (background script)")
 
 // Importing and using functionality from external files is also possible.
-importScripts('service-worker-utils.js')
+// importScripts('service-worker-utils.js')
 
 // If you want to import a file that is deeper in the file hierarchy of your
 // extension, simply do `importScripts('path/to/file.js')`.
 // The path should be relative to the file `manifest.json`.
 
-// Listen for messages from the popup or other parts of the extension
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action === "popup-window-opened") {
       console.log("YM: Button clicked message received in background script");
-    //   var el = document.getElementById('description')
-    //   el.style.backgroundColor = 'red'
-      // Add your logic here to respond to the button click event
 
-    //   console.log(this)
+      // Get the active tab
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        var activeTab = tabs[0];
+
+        // Add your logic here to respond to the button click event
+        // For example, execute content script in the active tab
+        chrome.scripting.executeScript({
+            files: ['contentScript.js'], // Change to 'code' if you want to include inline code
+            target: { tabId: activeTab.id }
+        });
+      });
     }
-  });
+});
 
 
   // Sender Dom'en over--------------------------------------
@@ -78,22 +84,29 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
 //   console.log(elementsArray);
 
-chrome.runtime.onInstalled.addListener(() => {
-    console.log("Extension Installed");
+// const myMethod = () => {
+//     console.log("My method is called!");
+//     chrome.runtime.sendMessage({ message: "Hello from service worker!" })
+//   };
   
-    // Example: Sending a message from the background (service worker)
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const activeTab = tabs[0];
+
+// chrome.runtime.onInstalled.addListener(() => {
+//     console.log("Extension Installed");
   
-      // Execute content script in the active tab
-      chrome.scripting.executeScript({
-        target: { tabId: activeTab.id },
-        function: sendScriptToPage,
-      });
-    });
-  });
+//     // Example: Sending a message from the background (service worker)
+//     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//       const activeTab = tabs[0];
   
-  // Function to send a message to the content script injected into the page
-  function sendScriptToPage() {
-    chrome.runtime.sendMessage({ message: "Hello from service worker!" });
-  }
+//       // Execute content script in the active tab
+//       chrome.scripting.executeScript({
+//         target: { tabId: activeTab.id },
+//         function: myMethod(),
+//       });
+//     });
+//   });
+  
+  
+//   // Function to send a message to the content script injected into the page
+//   function sendScriptToPage() {
+//     chrome.runtime.sendMessage({ message: "Hello from service worker!" });
+//   }

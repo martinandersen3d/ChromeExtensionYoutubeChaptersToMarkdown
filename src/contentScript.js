@@ -1,6 +1,8 @@
-console.log('YM: Hello from: contentScript')
-alert("Hello from: contentScript")
-
+// console.log('YM: Hello from: contentScript')
+// alert("Hello from: contentScript")
+let elDescription = document.getElementById('description')
+        elDescription.style.backgroundColor = "red"
+        
 
 
 if(typeof init === 'undefined'){
@@ -22,5 +24,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       // Add your custom action here
       console.log("Received a greeting from the service worker!");
       alert("Hello! This is a message from the service worker.");
+      
     }
   });
+
+
+  chrome.runtime.sendMessage({ message: "Hello from content script!" });
