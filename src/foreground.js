@@ -6,98 +6,17 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if (message.message === 'markdownText') {
-            
-            document.getElementById('ym-md-output').innerText = message.payload;
+
+    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+        if (message.type === 's-to-p') {
+          console.log('s-to-p: Received message in Popup from Service Worker:', message.data);
+          // Handle the message received in the popup from the service worker
         }
       });
-      document.getElementById('ym-md-output').innerText = message;
 
-
-    // cconsole.log('YM: Hello from: foreground')
-    // alert("Hello from: foreground")
-    // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    //     chrome.tabs.sendMessage(tabs[0].id, { action: 'extractDOM' });
-    //   });
-
-//     alert(pageTitle)
-//   console.log('YM: CONTENT LOADED');
-
-//     console.log(this.getElementById("description"))
-
-    function copyToClipboard(textToCopy) {
-        // Check if the Clipboard API is supported
-        if (navigator.clipboard) {
-            // Check if textToCopy is a string
-            if (typeof textToCopy === 'string') {
-
-                // Check if the user have grandted acces to the clipboard
-                navigator.clipboard.writeText('')
-                .then(() => {
-                    // Permission granted, now proceed to copy text
-                })
-                .catch(() => {
-                    // Permission denied or unable to get permission
-                });
-
-                // Use the Clipboard API to copy text
-                navigator.clipboard.writeText(textToCopy)
-                    .then(() => {
-                        console.log('Text successfully copied to clipboard');
-                    })
-                    .catch((err) => {
-                        console.error('Unable to copy text to clipboard', err);
-                    });
-            } else {
-                console.error('Invalid data type. textToCopy must be a string.');
-            }
-        } else {
-            // If Clipboard API is not supported, show an alert
-            alert("No clipboard supportet");
-        }
-    }
-
-
-
-    let elMdTextarea = this.getElementById('ym-md-output')
-    // elMdTextarea.innerText = "Text from textarea"
-
-    let elBtnCopyMarkdown = this.getElementById('ym-btn-copy-markdown')
-    
-
-    elBtnCopyMarkdown.addEventListener('click', function() {
-
-        copyToClipboard(elMdTextarea.value)
-    });
-
-    
-    // function hello (){
-    //     alert('Hi')
-    // }
-    // Add your popup logic here
-    // console.log('YM: Popup loaded successfully!');
-    // document.append('<a link="#">MY LING</a>')
-    // hello()
-
-    // Send message to service-worker.js
-    chrome.runtime.sendMessage({ action: "popup-window-opened" });
-
-    // const getTitle = () => {
-    //     console.log("getTitle() = " + document.title);
-    //     return document.title;
-    //   }
-      
-    //   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    //     console.log("Execute Script");
-    //     chrome.scripting.executeScript({
-    //       target: { tabId: tabs[0].id },
-    //       func: getTitle
-    //     }, (result) => {
-    //       console.log("Recv result = " + result[0].result);
-    //       document.getElementById("title").innerText = result[0].result;
-    //     });
-    //   });
+      document.getElementById('sendMessage').addEventListener('click', function () {
+        chrome.runtime.sendMessage({ type: 'p-to-s', data: 'Message from Popup to Service Worker' });
+      });
 
 
  

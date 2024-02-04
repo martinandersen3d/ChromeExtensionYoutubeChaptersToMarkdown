@@ -10,20 +10,20 @@
         "128": "logo/icon128.png"
     },
     "options_page": "settings/settings.html",
-    "action": {
-        "default_title": "Chrome Addon v3 Starter",
-        "default_popup": "popup.html"
-    },
+    
     "permissions": ["scripting", "activeTab", "tabs", "clipboardWrite"],
     "host_permissions": [
         "*://*/*"
     ],
+    "action": {
+        "default_title": "Chrome Addon v3 Starter",
+        "default_popup": "popup.html"
+    },
     "background": {
         "service_worker": "service-worker.js"
     },
     "content_scripts": [{
-        "js": ["foreground.js"],
-        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*"],
-        "run_at": "document_end"
+        "js": ["contentScript.js"],
+        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*", "https://*.youtube.com/*"]
     }]
 }
