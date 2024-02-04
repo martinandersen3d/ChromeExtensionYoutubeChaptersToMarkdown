@@ -4,25 +4,19 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-const greet = function(name) {
-    return `Hello, ${name}!`;
-  };
-
-
-let shared = "sdfdsf"
-// alert(window.document.title)
-// alert(document.title)
-let pageTitle = document.title
-
 
 document.addEventListener('DOMContentLoaded', function () {
-
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        document.getElementById('ym-md-output').innerText = message.message;
+        if (message.message === 'markdownText') {
+            
+            document.getElementById('ym-md-output').innerText = message.payload;
+        }
       });
+      document.getElementById('ym-md-output').innerText = message;
+
 
     // cconsole.log('YM: Hello from: foreground')
-    alert("Hello from: foreground")
+    // alert("Hello from: foreground")
     // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     //     chrome.tabs.sendMessage(tabs[0].id, { action: 'extractDOM' });
     //   });
@@ -67,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     let elMdTextarea = this.getElementById('ym-md-output')
-    elMdTextarea.innerText = "Text from textarea"
+    // elMdTextarea.innerText = "Text from textarea"
 
     let elBtnCopyMarkdown = this.getElementById('ym-btn-copy-markdown')
     
@@ -82,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //     alert('Hi')
     // }
     // Add your popup logic here
-    console.log('YM: Popup loaded successfully!');
+    // console.log('YM: Popup loaded successfully!');
     // document.append('<a link="#">MY LING</a>')
     // hello()
 

@@ -3,6 +3,7 @@
 // It would correspond to the background script in chrome extensions v2.
 
 
+
 // try{
 
 //     //ON page change
@@ -41,7 +42,7 @@
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action === "popup-window-opened") {
-      console.log("YM: Button clicked message received in background script");
+      console.log('> S 1');
 
       // Get the active tab
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -54,8 +55,19 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             target: { tabId: activeTab.id }
         });
       });
+      console.log('> S 2');
+
     }
+
+    if (message.message === "markdown-action") {
+        console.log('> S 3');
+
+    }
+    console.log('> S 4');
+    
+    chrome.runtime.sendMessage({ message: "service-worker-action" })
 });
+
 
 
   // Sender Dom'en over--------------------------------------
