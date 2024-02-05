@@ -21,19 +21,18 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       }
     });
   }
-});
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.type === 'c-to-s') {
     console.log('c-to-s: Received message in Service Worker:', message.data);
-
-    // Ensure that the tab is fully loaded before sending a message to the popup
-    sendMessage({ type: 's-to-p', data: 'Message from Service Worker to Popup' }, function (response) {
-      if (chrome.runtime.lastError) {
-        // console.error(chrome.runtime.lastError.message);
-      } else {
-        console.log('Response from Popup:', response);
-      }
+      chrome.runtime.sendMessage({
+        msg: "something_completed", 
+        data: {
+            subject: "Loading",
+            content: "Just completed!"
+        }
     });
   }
+
+
 });
+
