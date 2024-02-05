@@ -12,6 +12,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         chrome.tabs.sendMessage(tabs[0].id, { type: 's-to-c', data: 'Message from Service Worker to Content Script' }, function (response) {
           if (chrome.runtime.lastError) {
             // console.error(chrome.runtime.lastError.message);
+          } else {
+            console.log('Response from Content Script:', response);
           }
         });
       } else {
@@ -26,9 +28,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     console.log('c-to-s: Received message in Service Worker:', message.data);
 
     // Ensure that the tab is fully loaded before sending a message to the popup
-    chrome.runtime.sendMessage({ type: 's-to-p', data: 'Message from Service Worker to Popup' }, function (response) {
+    sendMessage({ type: 's-to-p', data: 'Message from Service Worker to Popup' }, function (response) {
       if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError.message);
+        // console.error(chrome.runtime.lastError.message);
+      } else {
+        console.log('Response from Popup:', response);
       }
     });
   }
