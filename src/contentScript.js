@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             content: "Just completed!"
         }
     });
-      sendResponse({ type: 'c-to-s', data: 'Response from Content Script to Service Worker' });
-      sendResponse({ type: 'c-to-s', data: 'Response from Content Script to Service Worker' });
+      // sendResponse({ type: 'c-to-s', data: 'Response from Content Script to Service Worker' });
+      // sendResponse({ type: 'c-to-s', data: 'Response from Content Script to Service Worker' });
     }
   });
