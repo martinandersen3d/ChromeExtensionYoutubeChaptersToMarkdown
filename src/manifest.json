@@ -1,9 +1,9 @@
 {
     // Comments are accepted in the manifest, even though it is JSON.
     "manifest_version": 3,
-    "name": "YouTube Chapters To Markdown: Copy and Export Chapters to Markdown",
+    "name": "YouTube Chapters To Markdown",
     "description": "YouTube Chapters To Markdown: Copy and Export Chapters to Markdown",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "icons": {
         "16": "logo/icon16.png",
         "48": "logo/icon48.png",
@@ -24,6 +24,6 @@
     },
     "content_scripts": [{
         "js": ["content-ym.js"],
-        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*", "https://*.youtube.com/*"]
+        "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*", "https://*.youtube.com/*", "https://*.youtu.be/*"]
     }]
 }

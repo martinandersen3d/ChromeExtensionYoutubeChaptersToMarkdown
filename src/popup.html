@@ -8,14 +8,23 @@
 </head>
 <body>
 
-    <button id="sendMessage">Send Message from Popup</button>
-    
-    <h1>YouTube: Copy To Markdown</h1>
-    <div class="form-group">
-        <label for="ym-md-output">Enter your message:</label>
+    <!-- <button id="sendMessage">Send Message from Popup</button> -->
+
+    <div style="display: flex; align-items: center;">
+        <img src="logo/icon48.png" alt="">
+        <!-- <img src="your-image.jpg" alt="Your Image" style="width: 100px; height: 100px; margin-right: 20px;"> -->
+        <div style="padding-left: 12px; ">
+            <div style="padding: 1px 4px;"><h2>YouTube Chapters To Markdown</h2></div>
+            <div style="padding: 1px  4px; font-size: 14px;">Copy and Export Chapters to Markdown</div>
+        </div>
+    </div>
+
+    <div class="form-group" style="padding-top: 12px;">
+        <label for="ym-md-output" ></label>
         <textarea id="ym-md-output" name="ym-md-output" class="scrollbar" rows="20"></textarea>
     </div>
     <button type="button" id='ym-btn-copy-markdown' class="full-width">Copy Markdown</button>
+    <p id="successMessage" class="success-message hidden">Success! Copied to clipboard.</p>
     <!-- <input type='button' value='Submit' id='ym-copy'> -->
 </body>
 <script src="popup.js"></script>

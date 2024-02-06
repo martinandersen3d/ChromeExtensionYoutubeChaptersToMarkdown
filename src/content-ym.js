@@ -1,6 +1,39 @@
+// EMPTY TEMPLATE (when no chapters)--------------------------------------
+
+const removeQuestionMarkAndAfter = (str) => {
+  const questionMarkIndex = str.indexOf('?t');
+  if (questionMarkIndex !== -1) {
+      return str.substring(0, questionMarkIndex);
+  }
+  return str;
+}
+
+const getEmptyTemplate = () => {
+  let url = window.location.toString()
+  let urlNoTimecode = removeQuestionMarkAndAfter(url)
+  let urlTimecode = `${urlNoTimecode}?t=0`
+  let title = document.title.replace(' - YouTube', '') 
+  
+  let template = `# ${title}
+
+![](${urlNoTimecode})
+
+Chapters:
+
+- [00:00](${urlTimecode}) Note
+- [00:00](${urlTimecode}) Note
+- [00:00](${urlTimecode}) Note
+- [00:00](${urlTimecode}) Note
+- [00:00](${urlTimecode}) Note
+`
+  return template
+}
+
+
+
+// EXTRACT TEXT FROM CHAPTERS --------------------------------------------
 
 const chaptersArray = () => {
-  // EXTRACT TEXT FROM CHAPTERS --------------------------------------------
 
   // Selecting elements by the given selector
   let nodeList = document.querySelectorAll("ytd-macro-markers-list-renderer ytd-macro-markers-list-item-renderer");
@@ -22,37 +55,59 @@ const chaptersArray = () => {
       output.push( { text: title, time: time, url: url } )
     }
     else {
-      console.log( 'Details element not found.' );
+      // console.log( 'Details element not found.' );
     }
   }
-  console.log(output)
+  // console.log(output)
   return output
 }
 
 const buildMarkdownChapters = () => {
-  let title = document.title.replace(' - YouTube', '') 
-  let output = `# ${title}
-  
+  try {
+    
+    let title = document.title.replace(' - YouTube', '') 
+    let url = window.location.toString()
+    let urlNoTimecode = removeQuestionMarkAndAfter(url)
+    let output = `# ${title}
+    
+![](${urlNoTimecode})
+
 Chapters:
 `
-  let arr = chaptersArray()
-  let count = arr.length
+    let arr = chaptersArray()
+    let count = arr.length
 
 
-  if (count > 0) {
-    for( let chapter of arr){
-      let template = `- [${chapter['time']}](${chapter['url']}) ${chapter['text']}\n`
-      output = output + template
+    if (count > 0) {
+      for( let chapter of arr){
+        let template = `- [${chapter['time']}](${chapter['url']}) ${chapter['text']}\n`
+        output = output + template
+      }
     }
-  }
-  return output
+    else{
+      return getEmptyTemplate()
+    }
 
+    return output
+
+    
+} catch (error) {
+  return getEmptyTemplate()
+}
 }
 
 
+// CHECK DOMAIN--------------------------------------
+const currentDomain = window.location.hostname;
+let isYoutube = false
+if (currentDomain.includes("youtu")) {
+  isYoutube = true
+    console.log("The current domain contains 'youtu'.");
+}
+
 // It will recieve a message from background.js
 chrome.runtime.onMessage.addListener( function ( message, sender, sendResponse ) {
-  if ( message.type === 'background-to-content' ) {
+  if ( message.type === 'background-to-content' && isYoutube ) {
     // console.log('s-to-c: Received message in Content Script:', message.data);
     // Handle the message from Service Worker if needed
     // If a response is expected, you can send it asynchronously
