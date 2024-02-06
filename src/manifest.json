@@ -1,8 +1,8 @@
 {
     // Comments are accepted in the manifest, even though it is JSON.
     "manifest_version": 3,
-    "name": "YouTube Chapter Copy",
-    "description": "Copy chapters from YouTube videos",
+    "name": "YouTube Chapters To Markdown: Copy and Export Chapters to Markdown",
+    "description": "YouTube Chapters To Markdown: Copy and Export Chapters to Markdown",
     "version": "0.0.1",
     "icons": {
         "16": "logo/icon16.png",
